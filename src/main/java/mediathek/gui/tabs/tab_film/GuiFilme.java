@@ -1,5 +1,6 @@
 package mediathek.gui.tabs.tab_film;
 
+import com.formdev.flatlaf.FlatClientProperties;
 import com.google.common.util.concurrent.FutureCallback;
 import com.google.common.util.concurrent.Futures;
 import com.google.common.util.concurrent.ListenableFuture;
@@ -67,6 +68,7 @@ import java.util.ArrayList;
 import java.util.EnumSet;
 import java.util.List;
 import java.util.Optional;
+import java.util.function.BiConsumer;
 
 public class GuiFilme extends AGuiTabPanel {
 
@@ -130,6 +132,12 @@ public class GuiFilme extends AGuiTabPanel {
 
         // add film description panel
         JTabbedPane tabbedPane = new JTabbedPane();
+        tabbedPane.putClientProperty( "JTabbedPane.tabCloseCallback",
+                (BiConsumer<JTabbedPane, Integer>) (tabPane, tabIndex) -> {
+                    System.out.println("TAB PANE CLOSE");
+                    tabPane.remove(tabIndex);
+                } );
+        tabbedPane.putClientProperty(FlatClientProperties.TABBED_PANE_TAB_CLOSABLE, true);
         tabbedPane.add("Beschreibung", fxDescriptionPanel);
         tabbedPane.add("Buttons", fxPsetButtonsPanel);
         extensionArea.add(tabbedPane);

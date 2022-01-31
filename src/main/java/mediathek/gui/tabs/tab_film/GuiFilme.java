@@ -129,8 +129,10 @@ public class GuiFilme extends AGuiTabPanel {
         createFilmActionPanel();
 
         // add film description panel
-        extensionArea.add(fxDescriptionPanel);
-        extensionArea.add(fxPsetButtonsPanel);
+        JTabbedPane tabbedPane = new JTabbedPane();
+        tabbedPane.add("Beschreibung", fxDescriptionPanel);
+        tabbedPane.add("Buttons", fxPsetButtonsPanel);
+        extensionArea.add(tabbedPane);
 
         setupFilmListTable();
 

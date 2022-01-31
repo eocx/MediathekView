@@ -8,7 +8,7 @@ import javafx.embed.swing.JFXPanel;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
-import javafx.scene.control.TabPane;
+import javafx.scene.layout.VBox;
 import javafx.stage.Modality;
 import jiconfont.icons.font_awesome.FontAwesome;
 import jiconfont.swing.IconFontSwing;
@@ -497,12 +497,8 @@ public class GuiDownloads extends AGuiTabPanel {
                 FXMLLoader loader = new FXMLLoader();
                 loader.setLocation(Konstanten.FXML_FILM_DESCRIPTION_PANEL_URL);
 
-                TabPane descriptionPane = loader.load();
+                VBox descriptionPane = loader.load();
                 final DescriptionPanelController descriptionPanelController = loader.getController();
-                descriptionPanelController.setOnCloseRequest(e -> {
-                    SwingUtilities.invokeLater(() -> fxDescriptionPanel.setVisible(false));
-                    e.consume();
-                });
 
                 fxDescriptionPanel.setScene(new Scene(descriptionPane));
                 SwingUtilities.invokeLater(() -> tabelle.getSelectionModel().addListSelectionListener(e -> {

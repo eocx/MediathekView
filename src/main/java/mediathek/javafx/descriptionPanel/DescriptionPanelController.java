@@ -1,12 +1,11 @@
 package mediathek.javafx.descriptionPanel;
 
 import javafx.embed.swing.JFXPanel;
-import javafx.event.Event;
-import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
+import javafx.scene.layout.VBox;
 import javafx.scene.text.*;
 import mediathek.config.Konstanten;
 import mediathek.daten.DatenFilm;
@@ -35,8 +34,6 @@ public class DescriptionPanelController {
     @FXML
     private TextFlow textField;
     @FXML
-    private Tab descriptionTab;
-    @FXML
     private ScrollPane scrollPane;
     private DatenFilm currentFilm;
     private ContextMenu contextMenu;
@@ -45,12 +42,8 @@ public class DescriptionPanelController {
         FXMLLoader loader = new FXMLLoader();
         loader.setLocation(Konstanten.FXML_FILM_DESCRIPTION_PANEL_URL);
 
-        TabPane descriptionPane = loader.load();
+        VBox descriptionPane = loader.load();
         final DescriptionPanelController descriptionPanelController = loader.getController();
-        descriptionPanelController.setOnCloseRequest(e -> {
-            SwingUtilities.invokeLater(() -> fxDescriptionPanel.setVisible(false));
-            e.consume();
-        });
 
         fxDescriptionPanel.setScene(new Scene(descriptionPane));
         return descriptionPanelController;
@@ -161,10 +154,6 @@ public class DescriptionPanelController {
         });
 
         return contextMenu;
-    }
-
-    public void setOnCloseRequest(EventHandler<Event> e) {
-        descriptionTab.setOnCloseRequest(e);
     }
 
     public void initialize() {
